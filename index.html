@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>AI MAZE SOLVER</title>
+  <link rel="stylesheet" type="text/css" href="maze/startStyle.css" />
+
+
+</head>
+
+<body>
+<div class="dark fire">
+  <h1 class="Blazing" contenteditable="true">AI <br><br> MAZE SOLVER</h1>
+</div>
+<div>
+
+  <div class="gradient-border" id="box"> <p style="font-size: 35px; color: aqua; font-weight: bold">About:</p> <br>A web-based Maze solver in which two identical mazes are generated side by side
+    in the window. Users need to select two different algorithms for each of the mazes to visualize the path
+    chosen by the respective agent. Also, to visualize how the path is discovered by the agent between the start
+    and endpoint using the respective search algorithm chosen by the user. <br>
+    Mazes would be created in the random fashion each and every time, having said that, obstacles in the
+    maze would be chosen randomly. But for the comparison of performance among the various parameters, we
+    will take the same random maze side by side. And when the user will choose the search algorithms to run
+    on, he can visualize it side by side.</div>
+
+
+
+
+  <h2>Instructions:</h2>
+  <h3>1- Click the button at the bottom of this page to start the Game.</h3>
+  <h3>2- Controls:</h3>
+
+
+  <ul class="tilesWrap">
+    <li>
+      <h2>01</h2>
+      <h3>Generate Maze button</h3>
+      <p>
+        Will generate a single random maze or two identical Mazes(If double maze option is selected).
+      </p>
+
+    </li>
+    <li>
+      <h2>02</h2>
+      <h3>Reset Button</h3>
+      <p>
+        Will reset maze back to initial state.
+      </p>
+
+    </li>
+    <li>
+      <h2>03</h2>
+      <h3>Clean Button</h3>
+      <p>
+        Will remove all the walls from the Maze.
+      </p>
+
+    </li>
+    <li>
+      <h2>04</h2>
+      <h3>Visualize Button</h3>
+      <p>
+        Will visualize in the Maze how the algorithm is finding the path to Destination.
+      </p>
+
+    </li>
+    <li>
+      <h2>05</h2>
+      <h3>Pause Button</h3>
+      <p>
+        Will Stop the visualization in between.
+      </p>
+
+    </li>
+    <li>
+      <h2>06</h2>
+      <h3>One Step Button</h3>
+      <p>
+        Will give ability to run algorithm Step by Step(one step on one click).Help in better understanding of how algorithm actually work.
+      </p>
+
+    </li>
+    <li>
+      <h2>07</h2>
+      <h3>Single Maze/Double Maze Button</h3>
+      <p>
+        User can choose the maze setup of his/her choice.
+      </p>
+
+    </li>
+    <li>
+      <h2>08</h2>
+      <h3>Select Size Dropdown</h3>
+      <p>
+        User can select from various size options of the Maze.
+      </p>
+
+    </li>
+    <li>
+      <h2>09</h2>
+      <h3>Difficulty Level Dropdown</h3>
+      <p>
+        User can choose difficulty level(more walls generated with increased level) of the Maze.
+      </p>
+
+    </li>
+    <li>
+      <h2>10</h2>
+      <h3>Delay box</h3>
+      <p>
+        User can set the speed by which algorithm will explore the paths.
+      </p>
+
+    </li>
+    <li>
+      <h2>11</h2>
+      <h3>Algorithm Select Dropdown</h3>
+      <p>
+        User can select from various AI Search algorithms to apply on a particular Maze.
+      </p>
+
+    </li>
+    <li>
+      <h2>12</h2>
+      <h3>Killer Maze Dropdown</h3>
+      <p>
+        Right next to the Generate maze button.User can select a Killer Maze(Algorithm perform worst) for some particular Algorithm .
+      </p>
+
+    </li>
+  </ul>
+
+
+
+  <h3>3- Statistics:</h3>
+  <div>
+    <div style="margin-right:100px">
+      <table id="statistics">
+        <tr>
+          <th>Stats Name</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td>New</td>
+          <td>It gives count of the maze cells which are not yet visited by the Algorithm.</td>
+        </tr>
+        <tr>
+          <td>Visited</td>
+          <td>It gives count of the maze cells which are visited by the Algorithm.</td>
+        </tr>
+        <tr>
+          <td>Explored</td>
+          <td>It gives count of the maze cells which are explored by the Algorithm.</td>
+        </tr>
+        <tr>
+          <td>Path length</td>
+          <td>It gives cell count in the path from source to destination discovered by Algorithm.</td>
+        </tr>
+
+      </table>
+
+    </div>
+  </div>
+
+
+
+</div>
+<div class="container">
+  <div class="center">
+    <button class="button" onclick="location.href = 'home.html';">START GAME</button>
+  </div>
+</div>
+</body>
+
+</html>

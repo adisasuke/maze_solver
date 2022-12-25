@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>AI Maze Solver</title>
+    <meta charset="UTF-8">
+    <!--    Bootstrap   -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Train One' rel='stylesheet'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!--    Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="./maze/index.css" />
+    <!--    Custom JS   -->
+    <script type="text/javascript" src="maze/constants.js"></script>
+    <script type="text/javascript" src="algorithms/AStar.js"></script>
+    <script type="text/javascript" src="algorithms/BFS.js"></script>
+    <script type="text/javascript" src="algorithms/Bidirectional.js"></script>
+    <script type="text/javascript" src="algorithms/DFS.js"></script>
+    <script type="text/javascript" src="algorithms/Dijkstra.js"></script>
+    <script type="text/javascript" src="algorithms/GBFS.js"></script>
+    <script type="text/javascript" src="maze/maze.js"></script>
+    <script type="text/javascript" src="maze/index.js"></script>
+    <script type="text/javascript" src="maze/customization.js"></script>
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="row toolbar">
+            <div class="col-12">
+                <H3 id="brand">AI Maze Solver</H3>
+
+                <div class="btn-group">
+                    <button class="btn btn-danger btn-sm" onclick="generateMaze();">Generate</button>
+                    <button type="button" class="btn btn-danger btn-sm dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <button class="dropdown-item btn btn-danger" onclick="generateBFSKiller();">BFS Killer</button>
+                        <button class="dropdown-item btn btn-danger" onclick="generateDFSKiller();">DFS Killer</button>
+                        <button class="dropdown-item btn btn-danger" onclick="generateDijkstraKiller();">Dijkstra Killer</button>
+                        <button class="dropdown-item btn btn-danger" onclick="generateGBFSKiller();">GBFS Killer</button>
+                    </div>
+                </div>
+
+                <button class="btn btn-danger btn-sm" onclick="resetMaze();">Reset</button>
+                <button class="btn btn-danger btn-sm" onclick="cleanMaze();">Clean</button>
+                <button id="visualizeButton" class="btn btn-danger btn-sm" onclick="visualize();">Visualize</button>
+                <button class="btn btn-danger btn-sm" onclick="oneStep();">One Step</button>
+                <button id="mazeCountButton" class="btn btn-danger btn-sm" value="two" onclick="createMaze();">Double Maze</button>
+
+
+                <select id="selectMazeSize" name="Size" onmousedown="this.value='';" onchange="selectMazeSize(this.value);">
+                    <option value=''>select size</option>
+                    <option value='auto' selected>Size: Auto</option>
+                    <option value='25'>Size: 25 rows</option>
+                    <option value='20'>Size: 20 rows</option>
+                    <option value='15'>Size: 15 rows</option>
+                    <option value='10'>Size: 10 rows</option>
+                    <option value='3'>Size: 3 rows</option>
+                </select>
+
+
+                <label for="mazeLevels">Difficulty Level</label>
+                <select id="mazeLevels" name="Size" onmousedown="this.value='';" onchange="selectLevel(this.value);">
+                    <option value=''>select level</option>
+                    <option value='Easy' selected>Easy</option>
+                    <option value='Medium'>Medium</option>
+                    <option value='Difficult'>Difficult</option>
+                    <option value='Pro'>Pro</option>
+                </select>
+
+                <label for="delay">Delay</label>
+                <input type="number" id="delay" name="delay" value="50" style="width: 60px;" min="0" max="10000" onchange="delayChange(this.value);">
+            </div>
+        </div>
+        <div class="row toolbar">
+            <div class="col-6">
+                <span>Maze 1</span>
+                <select id="selectMaze1" name="" onmousedown="this.value='';"
+                        onchange="selectAlgo('maze1', this.value);">
+                    <option value=''>select algo</option>
+                    <option value='A*+M'>A* Manhattan</option>
+                    <option value='A*+E'>A* Euclidean</option>
+                    <option value='A*+D'>A* Diagonal</option>
+                    <option value='Dijkstra' selected>Dijkstra</option>
+                    <option value='DFS'>DFS</option>
+                    <option value='BFS'>BFS</option>
+                    <option value='GBFS+M'>GBFS +M</option>
+                    <option value='GBFS+E'>GBFS +E</option>
+                    <option value='GBFS+D'>GBFS +D</option>
+                    <option value='Bidirectional'>Bidirectional</option>
+                </select>
+
+                <span><b>Statistics</b> &nbsp</span>
+                <label for="Open">New</label>
+                <input type="number" class="statsinput" id="New Cells maze1" name="Not Visited Cells" readonly value="0" min="0">
+
+                <label for="Open">Visited</label>
+                <input type="number" class="statsinput" id="Visited Cells maze1" name="Visited Cells" readonly value="0" min="0">
+
+                <label for="Open">Explored</label>
+                <input type="number" class="statsinput" id="Explored Cells maze1" name="Explored Cells" readonly value="0"  min="0">
+
+                <div id="maze1stats" class="pathStatsDiv"></div>
+
+            </div>
+
+            <div class="col-6">
+                <span>Maze 2</span>
+                <select id="selectMaze2" name="" onmousedown="this.value='';" onchange="selectAlgo('maze2', this.value);">
+                    <option value=''>select algo</option>
+                    <option value='A*+M' selected>A* Manhattan</option>
+                    <option value='A*+E'>A* Euclidean</option>
+                    <option value='A*+D'>A* Diagonal</option>
+                    <option value='Dijkstra'>Dijkstra</option>
+                    <option value='DFS'>DFS</option>
+                    <option value='BFS'>BFS</option>
+                    <option value='GBFS+M'>GBFS +M</option>
+                    <option value='GBFS+E'>GBFS +E</option>
+                    <option value='GBFS+D'>GBFS +D</option>
+                    <option value='Bidirectional'>Bidirectional</option>
+                </select>
+
+                <span><b>Statistics</b> &nbsp</span>
+                <label for="Open">New</label>
+                <input type="number" class="statsinput" id="New Cells maze2" name="Not Visited Cells" readonly value="0" min="0">
+
+                <label for="Open">Visited</label>
+                <input type="number" class="statsinput" id="Visited Cells maze2" name="Visited Cells" readonly value="0" min="0">
+
+                <label for="Open">Explored</label>
+                <input type="number" class="statsinput" id="Explored Cells maze2" name="Explored Cells" readonly value="0" min="0">
+
+                <div id="maze2stats" class="pathStatsDiv"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <div id="maze1"></div>
+            </div>
+
+            <div class="col-6">
+                <div id="maze2"></div>
+            </div>
+
+        </div>
+
+
+
+        <!-- context menu -->
+        <div id="contextMenu" class="context-menu" style="display:none">
+            <ul>
+                <li><button class="btn btn-primary" onclick="setSource();">Source</button></li>
+                <li><button class="btn btn-primary" onclick="setDestination();">Destination</button></li>
+                <li><button class="btn btn-primary" onclick="setEmpty();">Path</button></li>
+                <li><button class="btn btn-primary" onclick="setWall();">Wall</button></li>
+            </ul>
+        </div>
+
+    </div>
+</body>
+
+</html>
